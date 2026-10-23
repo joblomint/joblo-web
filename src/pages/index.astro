@@ -1,16 +1,108 @@
 ---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const services = [
+  { title: 'One-Page Websites', desc: 'A single, beautiful page that tells your whole story — perfect for small businesses.', icon: '⚡' },
+  { title: 'Multi-Page Sites', desc: 'Full websites with Home, About, Services, and Contact pages.', icon: '🏢' },
+  { title: 'E-commerce', desc: 'Sell products online with a secure checkout, product catalog, and inventory.', icon: '🛒' },
+  { title: 'Redesign & Rescue', desc: 'Already have a website that looks outdated? I rebuild it — faster, cleaner, more modern.', icon: '🔧' },
+];
+
+const projects = [
+  { title: 'Weather App', desc: 'A live weather dashboard pulling real-time data from the Open-Meteo API.', url: 'https://weather.jkay.my.id', tags: ['Astro', 'API'] },
+  { title: 'Calculator', desc: 'A fully functional calculator with keyboard support and custom CSS grid layout.', url: 'https://calc.jkay.my.id', tags: ['HTML', 'JavaScript'] }
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout>
+  <section class="hero">
+    <div class="container">
+      <p class="eyebrow">Web design & development</p>
+      <h1>Websites that <span class="grad">work</span>.</h1>
+      <p class="lead">I design and build fast, secure, mobile-friendly websites for businesses in Kenya and worldwide. From first idea to live site — usually in under a week.</p>
+      <div class="cta-row">
+        <a href="#contact" class="btn-primary btn-large">Get a Free Quote</a>
+        <a href="#work" class="btn-outline btn-large">See My Work</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="services" class="section">
+    <div class="container">
+      <h2 class="section-title">What I build</h2>
+      <p class="section-subtitle">Every project is custom — but these are the most common ones.</p>
+      <div class="grid grid-2">
+        {services.map((s) => (
+          <div class="card service-card">
+            <div class="card-icon">{s.icon}</div>
+            <h3>{s.title}</h3>
+            <p>{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section id="work" class="section">
+    <div class="container">
+      <h2 class="section-title">Recent work</h2>
+      <p class="section-subtitle">A few things I've built recently.</p>
+      <div class="grid grid-2">
+        {projects.map((p) => (
+          <a href={p.url} target="_blank" class="card work-card">
+            <h3>{p.title}</h3>
+            <p>{p.desc}</p>
+            <div class="tags">
+              {p.tags.map((t) => <span class="tag">{t}</span>)}
+            </div>
+            <span class="visit">Visit site →</span>
+          </a>
+        ))}
+        <div class="card card-placeholder">
+          <h3>Your project could be next</h3>
+          <p>I'm currently taking on new clients. Get a free quote — no obligation.</p>
+          <a href="#contact" class="visit">Start a project →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="section">
+    <div class="container">
+      <h2 class="section-title">Let's build something</h2>
+      <p class="section-subtitle">Tell me about your project. I reply within 24 hours.</p>
+      <div class="card contact-card">
+        <p>Ready to get started? Send me an email.</p>
+        <a href="mailto:hello@jkay.my.id" class="btn-primary btn-large">Send an Email</a>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    .hero { padding: 8rem 0 6rem 0; }
+    .eyebrow { text-transform: uppercase; letter-spacing: 0.15em; font-size: 0.85rem; color: #ffd93d; margin: 0 0 1rem 0; font-weight: 600; }
+    .hero h1 { font-size: clamp(3rem, 7vw, 5rem); font-weight: 800; letter-spacing: -0.04em; line-height: 1.05; margin: 0 0 1.5rem 0; }
+    .grad { background: linear-gradient(90deg, #ffd93d, #ff8a3d); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .lead { font-size: 1.2rem; color: #a0a0b0; max-width: 600px; margin: 0 0 2.5rem 0; }
+    .cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-large { padding: 0.9rem 1.8rem; font-size: 1rem; border-radius: 8px; }
+    .btn-outline { display: inline-block; padding: 0.9rem 1.8rem; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.2); color: #fff; text-decoration: none; font-weight: 600; transition: background 0.2s; }
+    .btn-outline:hover { background: rgba(255, 255, 255, 0.05); }
+    .grid { display: grid; gap: 1.5rem; }
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+    .card { background: rgba(255, 255, 255, 0.02); border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 2rem; transition: transform 0.3s, border-color 0.3s; }
+    .card:hover { transform: translateY(-5px); border-color: rgba(255, 217, 61, 0.4); }
+    .service-card .card-icon { font-size: 2.5rem; margin-bottom: 1rem; }
+    .card h3 { margin: 0 0 0.75rem 0; font-size: 1.3rem; color: #fff; }
+    .card p { margin: 0; color: #a0a0b0; font-size: 0.95rem; }
+    .work-card { text-decoration: none; display: flex; flex-direction: column; }
+    .work-card:hover h3 { color: #ffd93d; }
+    .tags { display: flex; gap: 0.5rem; flex-wrap: wrap; margin: 1.5rem 0; }
+    .tag { font-size: 0.75rem; padding: 0.2rem 0.6rem; background: rgba(255, 217, 61, 0.1); color: #ffd93d; border-radius: 999px; border: 1px solid rgba(255, 217, 61, 0.2); font-weight: 600; }
+    .visit { color: #ffd93d; font-weight: 600; font-size: 0.95rem; margin-top: auto; }
+    .card-placeholder { border-style: dashed; text-align: center; display: flex; flex-direction: column; justify-content: center; }
+    .card-placeholder .visit { margin-top: 1.5rem; }
+    .contact-card { text-align: center; padding: 4rem 2rem; }
+    .contact-card p { font-size: 1.2rem; margin-bottom: 2rem; color: #fff; }
+  </style>
+</BaseLayout>
